@@ -1,0 +1,4 @@
+Head/Generic Head/0/0
+Chest/Generic Chest/0/0
+Legs/Generic Legs/0/0
+Boots/Generic Boots/0/0

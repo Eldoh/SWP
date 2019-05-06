@@ -1,0 +1,4 @@
+Sword/Generic Sword/0/0/0
+Shield/Generic Shield/0/0/0
+Bow/Generic Bow/0/0/0
+Spear/Generic Spear/0/0/0
