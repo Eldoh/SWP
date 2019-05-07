@@ -34,8 +34,17 @@ public class Controller implements Initializable {
     @FXML
     private Button btn_feature;
 
+    MediatorInterface btnEdit;
+    MediatorInterface btnRemove;
+    MediatorInterface btnFeature;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        btnEdit = new BtnEditMediator(btn_edit);
+        btnRemove = new BtnRemoveMediator(btn_remove);
+        btnFeature = new BtnFeatureMediator(btn_feature);
+
         obsList = FXCollections.observableArrayList (
                 "Test1", "Test2", "Test3");
         obsList.add("Test4");
@@ -76,25 +85,29 @@ public class Controller implements Initializable {
 
     public void selectionChanged(){
         int selectedItemNumber = item_list.getSelectionModel().getSelectedItems().size();
-        switch(selectedItemNumber){
-            case 0:
-                btn_edit.setDisable(true);
-                btn_remove.setDisable(true);
-                btn_feature.setDisable(false);
-                break;
+        btnEdit.onSelect(selectedItemNumber);
+        btnRemove.onSelect(selectedItemNumber);
+        btnFeature.onSelect(selectedItemNumber);
 
-            case 1:
-                btn_edit.setDisable(false);
-                btn_remove.setDisable(false);
-                btn_feature.setDisable(true);
-                break;
-
-            default:
-                btn_edit.setDisable(true);
-                btn_remove.setDisable(false);
-                btn_feature.setDisable(true);
-                break;
-        }
+//        switch(selectedItemNumber){
+//            case 0:
+//                btn_edit.setDisable(true);
+//                btn_remove.setDisable(true);
+//                btn_feature.setDisable(false);
+//                break;
+//
+//            case 1:
+//                btn_edit.setDisable(false);
+//                btn_remove.setDisable(false);
+//                btn_feature.setDisable(true);
+//                break;
+//
+//            default:
+//                btn_edit.setDisable(true);
+//                btn_remove.setDisable(false);
+//                btn_feature.setDisable(true);
+//                break;
+//        }
 
     }
 
