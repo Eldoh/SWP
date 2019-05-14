@@ -3,7 +3,6 @@ package sample;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,16 +33,16 @@ public class Controller implements Initializable {
     @FXML
     private Button btn_feature;
 
-    MediatorInterface btnEdit;
-    MediatorInterface btnRemove;
-    MediatorInterface btnFeature;
+    MediatorInterface btnEditMediator;
+    MediatorInterface btnRemoveMediator;
+    MediatorInterface btnFeatureMediator;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        btnEdit = new BtnEditMediator(btn_edit);
-        btnRemove = new BtnRemoveMediator(btn_remove);
-        btnFeature = new BtnFeatureMediator(btn_feature);
+        btnEditMediator = new DisableOnMultiselectionMediator(btn_edit, item_list);
+        btnRemoveMediator = new DisableOnNoSelectionMediator(btn_remove, item_list);
+        btnFeatureMediator = new DisableOnAnySelectionMediator(btn_feature, item_list);
 
         obsList = FXCollections.observableArrayList (
                 "Test1", "Test2", "Test3");
@@ -53,12 +52,6 @@ public class Controller implements Initializable {
 
         item_list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        item_list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                selectionChanged();
-            }
-        });
         item_list.getSelectionModel().select(0);
     }
 
@@ -83,36 +76,10 @@ public class Controller implements Initializable {
         }
     }
 
-    public void selectionChanged(){
-        int selectedItemNumber = item_list.getSelectionModel().getSelectedItems().size();
-        btnEdit.onSelect(selectedItemNumber);
-        btnRemove.onSelect(selectedItemNumber);
-        btnFeature.onSelect(selectedItemNumber);
-
-//        switch(selectedItemNumber){
-//            case 0:
-//                btn_edit.setDisable(true);
-//                btn_remove.setDisable(true);
-//                btn_feature.setDisable(false);
-//                break;
-//
-//            case 1:
-//                btn_edit.setDisable(false);
-//                btn_remove.setDisable(false);
-//                btn_feature.setDisable(true);
-//                break;
-//
-//            default:
-//                btn_edit.setDisable(true);
-//                btn_remove.setDisable(false);
-//                btn_feature.setDisable(true);
-//                break;
-//        }
-
-    }
-
-
-
-
-
 }
+
+
+
+
+
+
