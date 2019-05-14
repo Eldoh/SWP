@@ -51,7 +51,6 @@ public class Controller implements Initializable {
         obsList.add("Test5");
 
         item_list.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
         item_list.getSelectionModel().select(0);
     }
 
